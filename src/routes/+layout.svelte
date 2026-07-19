@@ -11,10 +11,17 @@
 </svelte:head>
 
 <header class="site-header">
-	<a class="brand" href="/">Controlled Document Approval System</a>
+	<a class="brand" href="/">
+		<span class="brand-mark">CD</span>
+		Controlled Document Approval
+	</a>
 	{#if data.user}
 		<div class="session">
-			<span class="whoami">{data.user.name} <span class="role-tag">{data.user.role}</span></span>
+			<span class="whoami">
+				<span class="avatar">{data.user.name.charAt(0)}</span>
+				{data.user.name}
+				<span class="role-tag">{data.user.role}</span>
+			</span>
 			<form method="POST" action="/logout">
 				<button type="submit" class="link-button">Log out</button>
 			</form>

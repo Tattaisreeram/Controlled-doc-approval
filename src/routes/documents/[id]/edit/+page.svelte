@@ -10,16 +10,20 @@
 	<p class="banner {form.conflict ? 'banner-conflict' : 'banner-error'}">{form.message}</p>
 {/if}
 
-<form method="POST">
-	<input type="hidden" name="expectedVersion" value={data.doc.version} />
-	<label>
-		<span>Title</span>
-		<input type="text" name="title" value={data.doc.title} required />
-	</label>
-	<label>
-		<span>Body</span>
-		<textarea name="body" required>{data.doc.body}</textarea>
-	</label>
-	<button type="submit" class="primary">Save changes</button>
-	<a class="button" href="/documents/{data.doc.id}">Cancel</a>
-</form>
+<div class="card">
+	<form method="POST">
+		<input type="hidden" name="expectedVersion" value={data.doc.version} />
+		<label>
+			<span>Title</span>
+			<input type="text" name="title" value={data.doc.title} required />
+		</label>
+		<label>
+			<span>Body</span>
+			<textarea name="body" required>{data.doc.body}</textarea>
+		</label>
+		<div class="actions" style="border-top: none; padding-top: 0; margin-top: 0.25rem">
+			<button type="submit" class="primary">Save changes</button>
+			<a class="button" href="/documents/{data.doc.id}">Cancel</a>
+		</div>
+	</form>
+</div>

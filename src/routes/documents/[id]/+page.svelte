@@ -14,18 +14,20 @@
 	};
 </script>
 
-<h1>{data.doc.title}</h1>
+<div class="page-head">
+	<h1>{data.doc.title}</h1>
+</div>
 
 {#if form?.message}
 	<p class="banner {form.conflict ? 'banner-conflict' : 'banner-error'}">{form.message}</p>
 {/if}
 
 <div class="card">
-	<p>
+	<div class="card-head">
 		<span class="badge badge-{data.doc.status}">{data.doc.status}</span>
 		<small>version {data.doc.version}</small>
-	</p>
-	<p style="white-space: pre-wrap">{data.doc.body}</p>
+	</div>
+	<div class="card-body">{data.doc.body}</div>
 
 	<div class="actions">
 		{#if data.canEdit}
@@ -56,28 +58,30 @@
 
 <h2>History</h2>
 {#if data.history.length === 0}
-	<p>No activity yet.</p>
+	<div class="empty-state">No activity yet.</div>
 {:else}
-	<table>
-		<thead>
-			<tr>
-				<th>When</th>
-				<th>Actor</th>
-				<th>Action</th>
-				<th>From → To</th>
-				<th>Comment</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data.history as event (event.id)}
+	<div class="table-card">
+		<table>
+			<thead>
 				<tr>
-					<td>{new Date(event.createdAt).toLocaleString()}</td>
-					<td>{event.actorName}</td>
-					<td>{event.action}</td>
-					<td>{event.fromStatus ?? '—'} → {event.toStatus ?? '—'}</td>
-					<td>{event.comment ?? '—'}</td>
+					<th>When</th>
+					<th>Actor</th>
+					<th>Action</th>
+					<th>From → To</th>
+					<th>Comment</th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{#each data.history as event (event.id)}
+					<tr>
+						<td class="history-meta">{new Date(event.createdAt).toLocaleString()}</td>
+						<td>{event.actorName}</td>
+						<td>{event.action}</td>
+						<td class="history-meta">{event.fromStatus ?? '—'} → {event.toStatus ?? '—'}</td>
+						<td>{event.comment ?? '—'}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
 {/if}
