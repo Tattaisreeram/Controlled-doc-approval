@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
 	import type { TransitionName } from '$lib/server/transitions';
+	import Icon from '$lib/Icon.svelte';
+	import { statusIcon, actionIcon } from '$lib';
 
 	let { data, form }: PageProps = $props();
 
@@ -19,19 +21,25 @@
 </div>
 
 {#if form?.message}
-	<p class="banner {form.conflict ? 'banner-conflict' : 'banner-error'}">{form.message}</p>
+	<p class="banner {form.conflict ? 'banner-conflict' : 'banner-error'}">
+		<Icon name={form.conflict ? 'rotate-ccw' : 'x-circle'} size={16} />
+		{form.message}
+	</p>
 {/if}
 
 <div class="card">
 	<div class="card-head">
-		<span class="badge badge-{data.doc.status}">{data.doc.status}</span>
+		<span class="badge badge-{data.doc.status}"
+			><Icon name={statusIcon[data.doc.status]} size={12} />{data.doc.status}</span
+		>
 		<small>version {data.doc.version}</small>
 	</div>
 	<div class="card-body">{data.doc.body}</div>
 
 	<div class="actions">
 		{#if data.canEdit}
-			<a class="button" href="/documents/{data.doc.id}/edit">Edit</a>
+			<a class="button" href="/documents/{data.doc.id}/edit"><Icon name="pencil" size={14} /> Edit</a
+			>
 		{/if}
 
 		{#each data.actions as action (action)}
@@ -42,13 +50,15 @@
 						<span>Reason for rejection</span>
 						<textarea name="comment" required></textarea>
 					</label>
-					<button type="submit" class="danger">{actionLabels[action]}</button>
+					<button type="submit" class="danger"
+						><Icon name={actionIcon[action]} size={14} />{actionLabels[action]}</button
+					>
 				</form>
 			{:else}
 				<form method="POST" action="?/{action}">
 					<input type="hidden" name="expectedVersion" value={data.doc.version} />
 					<button type="submit" class={action === 'archive' ? 'danger' : 'primary'}
-						>{actionLabels[action]}</button
+						><Icon name={actionIcon[action]} size={14} />{actionLabels[action]}</button
 					>
 				</form>
 			{/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import Icon from '$lib/Icon.svelte';
 	import '../app.css';
 
 	let { children, data } = $props();
@@ -23,7 +24,7 @@
 				<span class="role-tag">{data.user.role}</span>
 			</span>
 			<form method="POST" action="/logout">
-				<button type="submit" class="link-button">Log out</button>
+				<button type="submit" class="link-button"><Icon name="log-out" size={14} /> Log out</button>
 			</form>
 		</div>
 	{/if}

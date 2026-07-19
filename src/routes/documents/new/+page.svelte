@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import Icon from '$lib/Icon.svelte';
 
 	let { form }: PageProps = $props();
 </script>
@@ -7,7 +8,7 @@
 <h1>New document</h1>
 
 {#if form?.message}
-	<p class="banner banner-error">{form.message}</p>
+	<p class="banner banner-error"><Icon name="x-circle" size={16} />{form.message}</p>
 {/if}
 
 <div class="card">
@@ -20,6 +21,6 @@
 			<span>Body</span>
 			<textarea name="body" required></textarea>
 		</label>
-		<button type="submit" class="primary">Create draft</button>
+		<button type="submit" class="primary"><Icon name="plus" size={14} /> Create draft</button>
 	</form>
 </div>
