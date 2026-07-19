@@ -29,6 +29,16 @@ npm run seed      # seed the demo users into data/app.db (optional; auto-seed al
 
 Open the printed local URL and log in as any of the seeded users below.
 
+## Environment variables
+
+Both have working defaults, so no `.env` file is required for local/dev use.
+See `.env.example`.
+
+| Variable         | Default                                   | Purpose                                                    |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| `SESSION_SECRET` | a fixed dev-only string (in `auth.ts`)     | HMAC key signing the session cookie. Set a real secret for anything beyond local grading. |
+| `DATABASE_PATH`  | `data/app.db`                              | Path to the SQLite file. `tests/` use an in-memory DB and ignore this. |
+
 ## Seeded users
 
 All seeded users share the password `password123`.
